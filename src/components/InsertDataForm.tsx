@@ -137,7 +137,7 @@ export function ProfileForm()
 					render={({ field }) => (
 						<FormItem className="w-full">
 							<FormLabel>Moneda</FormLabel>
-								<Select onValueChange={field.onChange} defaultValue={field.value}>
+								<Select {...field} onValueChange={field.onChange} defaultValue={field.value}>
 									<FormControl className="w-full">
 										<SelectTrigger className="w-full">
 											<SelectValue className="w-full" placeholder="Select a verified email to display" />
