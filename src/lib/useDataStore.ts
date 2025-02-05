@@ -97,14 +97,21 @@ export function useRemoveFromStore()
 }
 
 
-export function useAddDataToStore({ reset } : { reset : (values?: formSchemaType, options?: Record<string, boolean>) => void})
+export function useAddDataToStore({ reset } : { reset : (values?: formSchemaType, options?: Record<string, boolean>) => void })
 {
 	const queryClient = useQueryClient();
 
 	return useMutation({
 		mutationFn: postDataToStore,
-		onSuccess: () => {
-			reset();
+		onSuccess: (_, variables: formSchemaType) => {
+
+			// reset() to reset everything
+			// get the previous value for select to keep moneda
+			reset({
+				nume: '',
+				pret: '',
+				moneda: variables.moneda
+			});
 
 			// Invalidate and refetch
 			queryClient.invalidateQueries({
